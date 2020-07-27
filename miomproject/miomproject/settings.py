@@ -146,5 +146,5 @@ if APP_PHASE == "development":
     STATIC_URL = '/static/'
     STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 else:
-    STATIC_URL = f"{AWS_S3_ENDPOINT_URL}/{AWS_LOCATION}"
+    STATIC_URL = f"{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}"
     STATIC_ROOT = 'static/'
