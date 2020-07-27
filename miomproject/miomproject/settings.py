@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
+
 import os
 from dotenv import load_dotenv
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -26,7 +27,7 @@ DEBUG = True
 if APP_PHASE == "development":
     ALLOWED_HOSTS = []
 else:
-    ALLOWED_HOSTS = [SERVER_IP, "localhost"]
+    ALLOWED_HOSTS = [SERVER_IP, "localhost", '127.0.0.1']
 
 
 # Application definition
@@ -133,18 +134,18 @@ AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 
 AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
 AWS_S3_ENDPOINT_URL = os.getenv("AWS_S3_ENDPOINT_URL")
-AWS_S3_CUSTOM_DOMAIN = os.getenv("AWS_S3_CUSTOM_DOMAIN")
+# AWS_S3_CUSTOM_DOMAIN = os.getenv("AWS_S3_CUSTOM_DOMAIN")
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
-AWS_LOCATION = 'static/'
-AWS_DEFAULT_ACL = "public-read"
+# name of folder to store static files in
+AWS_LOCATION = 'static'
+AWS_DEFAULT_ACL = 'public-read'
 
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
 if APP_PHASE == "development":
     STATIC_URL = '/static/'
     STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 else:
-    STATIC_URL = f"{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}"
-    STATIC_ROOT = 'miom/'
+    STATIC_URL = f'{AWS_S3_ENDPOINT_URL}/{AWS_LOCATION}/'
+    # STATIC_ROOT = '/static'
