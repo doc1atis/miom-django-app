@@ -27,7 +27,7 @@ DEBUG = True
 if APP_PHASE == "development":
     ALLOWED_HOSTS = []
 else:
-    ALLOWED_HOSTS = [SERVER_IP, "localhost", '127.0.0.1']
+    ALLOWED_HOSTS = [SERVER_IP, "www.olgymiom.com" "localhost", '127.0.0.1']
 
 
 # Application definition
